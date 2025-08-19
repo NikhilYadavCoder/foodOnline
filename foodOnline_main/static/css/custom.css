@@ -1,0 +1,15 @@
+.alert {
+    position: fixed;
+    top: 20px;   /* Show at top */
+    right: 20px; /* Show at right */
+    z-index: 9999;
+    min-width: 300px;
+    max-width: 500px;
+    animation: fadeout 7s forwards; /* Disappear after 7s */
+}
+
+@keyframes fadeout {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; display: none; }
+}
