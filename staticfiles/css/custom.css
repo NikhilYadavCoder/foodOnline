@@ -13,3 +13,9 @@
     80% { opacity: 1; }
     100% { opacity: 0; display: none; }
 }
+
+.btn.btn-info{
+    padding: 2px 1.75em;
+    font-size: 5px;
+    cursor: pointer;
+}
