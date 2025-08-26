@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+{% block content %}
+{% include 'includes/alerts.html' %}
+<!-- Main Section Start -->
+<div class="main-section">
+    {%include 'includes/cover.html'%}
+    <div class="page-section account-header buyer-logged-in">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    {% include 'includes/v_sidebar.html' %}
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <div class="user-dashboard loader-holder">
+                        <div class="user-holder">
+                            <h5 class="text-uppercase">Build Your Food menu</h5>
+                            <hr>
+                            <h6>Menu Ctegories</h6>
+                            <a href="#" class="btn btn-success float-right m-1">Add Food</a>
+                            <a href="#" class="btn btn-info float-right m-1">Add Category</a>
+                            <table class="table table-hover table-borderless">
+                                
+                                <tbody>
+                                  <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                  </tr>
+                                 
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main Section End -->
+{% endblock %}
