@@ -66,6 +66,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "accounts.context_processors.get_vendor",
+                "accounts.context_processors.get_google_api",
             ],
         },
     },
@@ -135,7 +136,7 @@ STATIC_URL = '/static/'
 
 import os
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),   # if you have global static folder
+    os.path.join(BASE_DIR, "foodOnline_main", "static"),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # for collectstatic in production
@@ -165,3 +166,6 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS=True
 DEFAULT_FROM_EMAIL = 'foodOnline marketplace <nikhilyadavg36@gmail.com>'
+
+
+GOOGLE_API_KEY = 'AIzaSyDelCi_Yov96D7LKr2m8d95njUFwo2BB8s'
