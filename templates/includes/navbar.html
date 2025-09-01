@@ -1,49 +1,57 @@
-{%load static%}
-<!--Main Wrapper-->
-	<div class="wrapper">
-		<!-- Header Start -->
-		<header id="header">
-			<div class="main-header">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-							<div class="logo">
-								<figure>
-									<a href="{%url 'home'%}" class="light-logo">
-										<img src="{% static 'logo\foodOnlineLogo.png' %}" alt="FoodOnline" width="250">
-									</a>
-								</figure>
-							</div>
-							
-							<div class="main-location" style="margin-left: 15px;">
-								<ul>
-									<li class="location-has-children choose-location">
-										<form action="#">
-											<input type="text" value="" name="location" placeholder="Enter your delivery location" autocomplete="off">
-											<span id="foodbakery_radius_location_open" class="foodbakery-radius-location"><i class="icon-target5"></i></span>
-										</form>
-										
-									</li>
-								</ul>
-								</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-							<div class="login-option">
-								{%if user.is_authenticated %}
-							    <a class="cs-color cs-popup-joinus-btn login-popup " href="{% url 'myAccount' %}">MyAccount</a>
-                                <a class="cs-color cs-popup-joinus-btn login-popup text-danger" href="{% url 'logout' %}">Logout</a>
-							    
-
-							    {%else%}
-								<a class="cs-color cs-popup-joinus-btn login-popup" href="{% url 'login'%}">Login</a> / 
-								<span><a class="cs-color cs-popup-joinus-btn login-popup ml-0" href="{% url 'registerUser' %}">Register</a></span><a class="get-start-btn" href="{%url 'registerVendor'%}">
-									Register
-									Restaurant </a>
-								{%endif%}
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
-		<!-- Header End -->
+{% load static %}
+<!-- Main Wrapper -->
+<div class="wrapper">
+    <!-- Header Start -->
+    <header id="header">
+        <div class="main-header">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <!-- Logo and Location -->
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 d-flex align-items-center">
+                        <div class="logo mr-3">
+                            <a href="{% url 'home' %}" class="light-logo">
+                                <img src="{% static 'logo/foodOnlineLogo.png' %}" alt="FoodOnline" width="200">
+                            </a>
+                        </div>
+                        <div class="main-location" style="flex: 0 0 80%; max-width: 60%;">
+                            <form action="#" class="w-100">
+                                <div class="input-group">
+                                    <input type="text" name="location" class="form-control" placeholder="Enter your delivery location" autocomplete="off">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <i class="icon-target5"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Navbar buttons -->
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 d-flex justify-content-end align-items-center">
+						{% if user.is_authenticated %}
+						<a href="{% url 'cart' %}">
+							<i class="fa fa-shopping-cart text-danger" style="font-size: 20px;"></i>
+							<span class="badge badge-warning" id="cart_counter" style="border-radius: 50px; position:relative; bottom: 10px; left: -5px;">{{cart_count}}</span>
+						</a>
+						{% endif %}
+                        <a href="{% url 'marketplace' %}" class="btn btn-outline-danger text-uppercase font-weight-bold mr-2">Marketplace</a>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'myAccount' %}" class="btn btn-link">My Account</a>
+                            <a href="{% url 'logout' %}" class="btn btn-link text-danger">Logout</a>
+                        {% else %}
+                            <span class="d-flex align-items-center">
+                                <a href="{% url 'login' %}" class="btn btn-link p-0 text-uppercase">Login</a>
+                                <span class="mx-1">/</span>
+                                <a href="{% url 'registerUser' %}" class="btn btn-link p-0 text-uppercase">Register</a>
+                            </span>
+                            <a href="{% url 'registerVendor' %}" class="btn btn-danger ml-3 font-weight-bold" style="white-space: nowrap;">
+                                Register Restaurant
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+</div>
