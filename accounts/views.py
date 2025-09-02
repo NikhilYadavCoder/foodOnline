@@ -13,6 +13,8 @@ from vendor.models import Vendor
 from django.template.defaultfilters import slugify
 
 from django.core.exceptions import PermissionDenied
+
+
 # Create your views here.
 
 def check_role_vendor(user):
@@ -82,9 +84,10 @@ def registerVendor(request):
             user = User.objects.create_user(first_name=first_name,last_name=last_name,username=username,email=email,password=password)
             user.role = User.VENDOR
             user.save()
+            vendor = v_form.save(commit=False)
             vendor_name = v_form.cleaned_data['vendor_name']
             vendor.vendor_slug = slugify(vendor_name)+'-'+str(user.id)
-            vendor = v_form.save(commit=False)
+            
             vendor.user = user
             user_profile = UserProfile.objects.get(user=user)
             vendor.user_profile = user_profile

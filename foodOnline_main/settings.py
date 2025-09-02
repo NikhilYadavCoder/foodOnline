@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "vendor",
     "menu",
     'marketplace',
+    'django.contrib.gis',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +85,8 @@ WSGI_APPLICATION = "foodOnline_main.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        # "ENGINE": "django.db.backends.postgresql",
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         "NAME": "foodOnline_db",
         "USER": "postgres",
         "PASSWORD":"9573",
@@ -173,3 +175,7 @@ DEFAULT_FROM_EMAIL = 'foodOnline marketplace <nikhilyadavg36@gmail.com>'
 
 
 GOOGLE_API_KEY = config('GOOGLE_API_KEY')
+
+os.environ['PATH'] = os.path.join(BASE_DIR, "env/Lib/site-packages/osgeo") + ";" + os.environ['PATH']
+os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, "env/Lib/site-packages/osgeo/data/proj") + ";" + os.environ['PATH']
+GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, "env/Lib/site-packages/osgeo/gdal.dll")
