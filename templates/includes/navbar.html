@@ -13,17 +13,15 @@
                                 <img src="{% static 'logo/foodOnlineLogo.png' %}" alt="FoodOnline" width="200">
                             </a>
                         </div>
-                        <div class="main-location" style="flex: 0 0 80%; max-width: 60%;">
-                            <form action="#" class="w-100">
-                                <div class="input-group">
-                                    <input type="text" name="location" class="form-control" placeholder="Enter your delivery location" autocomplete="off">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <i class="icon-target5"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="main-location ml-5">
+                            <ul>
+                                <li class="location-has-children choose-location">
+                                    <form action="#">
+                                        <input type="text" value="" name="location" id="location" placeholder="Your current location" autocomplete="off">
+                                        <span id="foodbakery_radius_location_open" class="foodbakery-radius-location" onclick="getLocation()"><i class="icon-target5"></i></span>
+                                    </form>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <!-- Navbar buttons -->
@@ -54,4 +52,49 @@
         </div>
     </header>
     <!-- Header End -->
+    <script>
+        var x = document.getElementById("location");
+
+        var current_location = sessionStorage.getItem("current_location")
+
+        if(current_location != ""){
+            x.value = current_location;
+            
+        }
+
+        function getLocation() {
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(ShowPosition, error);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function ShowPosition(position) {
+            var lat = position.coords.latitude
+            var lng = position.coords.longitude
+
+            // hit Ajax request to google maps endpoint and get the location data using those lat and long
+            var GOOGLE_API_KEY = "{{ GOOGLE_API_KEY }}"
+            var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"+&key="+GOOGLE_API_KEY
+            
+            $.ajax({
+                url:url,
+                type: "GET",
+                success: function(response){
+                    var current_location = response.results[0].formatted_address
+                    x.value = current_location
+                    sessionStorage.setItem("current_location",current_location)
+                    window.location = "?lat="+lat+"&lng="+lng
+                }
+            })
+
+
+        }
+
+        function error() {
+            alert("Sorry, no position available.");
+        }
+    </script>
 </div>
