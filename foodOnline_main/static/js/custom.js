@@ -88,7 +88,7 @@ $(document).ready(function(){
 
                     applyCartAmounts(
                         response.cart_amount['subtotal'],
-                        response.cart_amount['tax'],
+                        response.cart_amount['tax_dict'],
                         response.cart_amount['total']
                     )
                 }
@@ -127,7 +127,7 @@ $(document).ready(function(){
                 }
                 applyCartAmounts(
                     response.cart_amount['subtotal'],
-                    response.cart_amount['tax'],
+                    response.cart_amount['tax_dict'],
                     response.cart_amount['total']
                 )
                 // ✅ Update quantity
@@ -172,7 +172,7 @@ $(document).ready(function(){
 
                     applyCartAmounts(
                         response.cart_amount['subtotal'],
-                        response.cart_amount['tax'],
+                        response.cart_amount['tax_dict'],
                         response.cart_amount['total']
                     )
                     
@@ -204,11 +204,18 @@ $(document).ready(function(){
     }
 
     // apply cart amounts
-    function applyCartAmounts(subtotal, tax, total){
+    function applyCartAmounts(subtotal, tax_dict, total){
         if(window.location.pathname == '/cart/'){
             $('#subtotal').html(subtotal)
-            $('#tax').html(tax)
             $('#total').html(total)
+            // Clear all tax rows before re-rendering
+            $('[id^="tax-"]').html('0');
+            for(key1 in tax_dict){
+                for(key2 in tax_dict[key1]){
+                    let taxValue = tax_dict[key1][key2] || 0;
+                    $('#tax-'+key1).html('₹ ' + taxValue);
+                }
+            }
         }
         
     }
